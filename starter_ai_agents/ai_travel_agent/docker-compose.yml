@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ai-travel-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      # 可选：挂载一个本地目录来保存生成的ICS文件
+      - ./output:/app/output
+    environment:
+      # Streamlit配置
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_ENABLE_CORS=false
+      - STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
+    restart: unless-stopped
